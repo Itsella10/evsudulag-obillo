@@ -1,0 +1,25 @@
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+  }
+  
+  .login-card {
+    width: 400px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: space-between;
+  }
+  

@@ -1,0 +1,36 @@
+<div class="login-wrapper">
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Welcome Back</h2>
+          <p>Please login to continue</p>
+        </mat-card-title>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required />
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="loginForm.get('email')?.invalid">Enter a valid email</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" required />
+            <mat-icon matSuffix>lock</mat-icon>
+            <mat-error *ngIf="loginForm.get('password')?.invalid">Password is required</mat-error>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="loginForm.invalid">Login</button>
+        </form>
+      </mat-card-content>
+  
+      <mat-card-actions class="center">
+        <button mat-button color="accent">Forgot Password?</button>
+        <button mat-button color="primary">Sign Up</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
