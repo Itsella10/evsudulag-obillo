@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +12,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   onLogin() {
-    if (this.loginForm.valid) {
-      console.log('Login successful:', this.loginForm.value);
-      alert('Login Successful');
+    const { username, password } = this.loginForm.value;
+    if (this.userService.validateInput(username, password)) {
+      this.router.navigate(['/main/profile'])
     } else {
-      console.log('Invalid login form');
+      console.log('error');
     }
   }
 }
