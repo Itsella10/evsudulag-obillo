@@ -19,12 +19,36 @@ export class LoginComponent {
     });
   }
 
+  loginError: string = '';
+
   onLogin() {
-    const { username, password } = this.loginForm.value;
-    if (this.userService.validateInput(username, password)) {
-      this.router.navigate(['/main/profile'])
-    } else {
-      console.log('error');
+    if (this.loginForm.invalid) {
+      this.loginError = 'Please enter valid credentials.';
+      return;
     }
+
+    this.userService.userLogin(this.loginForm.value).subscribe({
+      next: (data) => {
+        if (data?.user) {
+          this.router.navigate(['/main/dashboard']); // Redirect
+          this.loginError = ''; // Clear error if login is successful
+        }
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.loginError = 'Invalid username or password.'; // Show error for wrong credentials
+        } else {
+          this.loginError = 'Something went wrong. Please try again.';
+        }
+      }
+    });
   }
+
+    // const { username, password } = this.loginForm.value;
+    // if (this.userService.validateInput(username, password)) {
+    //   this.router.navigate(['/main/profile'])
+    // } else {
+    //   console.log('error');
+    // }
+  // }
 }
